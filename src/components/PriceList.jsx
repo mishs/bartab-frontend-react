@@ -8,7 +8,7 @@ function PriceList() {
     beersList.map((beer, i) => (
       <TableRow key={i}>
         <TableDataItem>{beer.name}</TableDataItem>
-        <TableDataItem>DKK  {(beer.price).toFixed(2)}</TableDataItem>
+        <TableDataItem>DKK {(beer.price).toFixed(2)}</TableDataItem>
       </TableRow>
     ));
   return (
