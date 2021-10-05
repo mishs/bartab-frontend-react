@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import PriceList from './components/PriceList';
@@ -30,7 +30,7 @@ function App() {
   };
 
   const renderTabButtons = () => (
-    <>
+    <React.Fragment>
       <TabsButton
         className={activeTab === TABS.BEERS_PRICE_LIST && 'active'}
         onClick={() => setActiveTab(TABS.BEERS_PRICE_LIST)}
@@ -43,7 +43,7 @@ function App() {
       >
         Orders
       </TabsButton>
-    </>
+    </React.Fragment>
   );
 
   const renderTabContent = () => {

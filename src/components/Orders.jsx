@@ -39,18 +39,18 @@ function Orders() {
     <OrdersContext.Consumer>
       {({ orders, addOrder }) =>
         view === VIEWS.NEW_ORDER ? (
-          <>
+          <React.Fragment>
             <NewOrder
               onAddOrder={(order) => {
                 addOrder(order);
                 setView(VIEWS.ORDERS);
               }}
             />
-          </>
+          </React.Fragment>
         ) : view === VIEWS.ORDER_DETAILS ? (
           <OrderDetails onGoBack={() => setView(VIEWS.ORDERS)} order={orderDetails} />
         ) : (
-          <>
+          <React.Fragment>
             {orders.length ? (<Table>
               <TableRow>
                 <TableHead>#</TableHead>
@@ -67,7 +67,7 @@ function Orders() {
                 Add New Order
               </ButtonStyles>
             </div>
-          </>
+          </React.Fragment>
         )
       }
     </OrdersContext.Consumer>
