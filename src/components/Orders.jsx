@@ -23,7 +23,7 @@ function Orders() {
       <TableRow key={i}>
         <TableData className="serialNo">{i + 1}</TableData>
         <TableData className="orderedAt">{formatDate(order.orderedAt)}</TableData>
-        <TableData className="orderAmount">DKK  {(parseFloat(order.totalAmount)).toFixed(2)}</TableData>
+        <TableData className="orderAmount">$ {(parseFloat(order.totalAmount)).toFixed(2)}</TableData>
         <TableData className="viewOrder">
         <ButtonStyles onClick={() => {
           setOrderDetails(order);
@@ -37,7 +37,7 @@ function Orders() {
 
   return (
     <OrdersContext.Consumer>
-      {({ orders, addOrder }) =>
+      {({ orders, addOrder, addItemToOrder }) =>
         view === VIEWS.NEW_ORDER ? (
           <React.Fragment>
             <NewOrder
@@ -45,10 +45,11 @@ function Orders() {
                 addOrder(order);
                 setView(VIEWS.ORDERS);
               }}
+              totalOrders={orders.length}
             />
           </React.Fragment>
         ) : view === VIEWS.ORDER_DETAILS ? (
-          <OrderDetails onGoBack={() => setView(VIEWS.ORDERS)} order={orderDetails} />
+          <OrderDetails onGoBack={() => setView(VIEWS.ORDERS)} onAddItemToOrder={addItemToOrder} order={orderDetails} />
         ) : (
           <React.Fragment>
             {orders.length ? (<Table>

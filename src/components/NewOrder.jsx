@@ -10,7 +10,7 @@ const VIEWS = {
   REQUEST_BILL: 'REQUEST_BILL',
 };
 
-function NewOrder({ onAddOrder }) {
+function NewOrder({ onAddOrder, totalOrders }) {
   const [view, setView] = useState([null]);
   const [items, setItems] = useState([null]);
 
@@ -35,6 +35,16 @@ function NewOrder({ onAddOrder }) {
     }
   };
 
+  const getBeersNotInUse = (currentBeerName) => {
+    return beersList.filter(beer => {
+      const beerExists = items.find(item => item && item.name === beer.name);
+      if(!beerExists || beer.name === currentBeerName) {
+        return true;
+      }
+      return false;
+    })
+  }
+
   const getCurrentOrder = () => {
     const _orderedAt = new Date();
     const _items = items.filter((item) => item);
@@ -44,6 +54,7 @@ function NewOrder({ onAddOrder }) {
     );
 
     return {
+      orderId: totalOrders,
       orderedAt: _orderedAt,
       items: _items,
       totalAmount: _totalAmount,
@@ -68,21 +79,21 @@ function NewOrder({ onAddOrder }) {
       <TableRow key={i}>
         <TableData className="serialNo">{i + 1}</TableData>
         <TableData className="item">
-          <SelectInput
+          <select
             onChange={(e) => handleBeerChange(i, e.target.value)}
             value={items[i] ? items[i].name : ''}
           >
             {beerName === null && (
-              <Option value="" disabled>
+              <option value="" disabled>
                 --Select Beer Type--
-              </Option>
+              </option>
             )}
-            {beersList.map((beer, j) => (
-              <Option key={j} value={beer.name}>
+            {getBeersNotInUse(items[i] && items[i].name).map((beer, j) => (
+              <option key={j} value={beer.name}>
                 {beer.name}
-              </Option>
+              </option>
             ))}
-          </SelectInput>
+          </select>
         </TableData>
         <TableData className="qty">
           <QtyInput
@@ -109,7 +120,7 @@ function NewOrder({ onAddOrder }) {
       </Table>
       <br />
       <div>
-        <ButtonStyles onClick={handleItemAdd} disabled={items.includes(null)}>
+        <ButtonStyles onClick={handleItemAdd} disabled={items.includes(null) || getBeersNotInUse().length === 0}>
           Add Item
         </ButtonStyles>
       </div>
@@ -128,9 +139,6 @@ function NewOrder({ onAddOrder }) {
     </div>
   );
 }
-
-export const SelectInput = styled.select``;
-export const Option = styled.option``;
 
 export const QtyInput = styled.input`
   text-align: center;

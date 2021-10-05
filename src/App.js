@@ -29,6 +29,18 @@ function App() {
     localStorage.setItem('ORDERS', JSON.stringify(newOrders));
   };
 
+  const addItemToOrder = (orderId, item) => {
+    debugger;
+    const newOrders = [...orders];
+    const order = newOrders.find(order => order.orderId === orderId);
+    if(!order) return;
+
+    order.items.push(item);
+    order.totalAmount += item.qty * item.price;
+    setOrders(newOrders);
+    localStorage.setItem('ORDERS', JSON.stringify(newOrders));
+  }
+
   const renderTabButtons = () => (
     <React.Fragment>
       <TabsButton
@@ -64,6 +76,7 @@ function App() {
         value={{
           orders,
           addOrder,
+          addItemToOrder
         }}
       >
         <TabsWrapper>
