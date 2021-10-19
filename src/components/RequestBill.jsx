@@ -46,7 +46,7 @@ function RequestBill({ onGoBack, order }) {
             onChange={handleNoOfPeopleChange}
           />
           {!isNaN(noOfPoeple) && noOfPoeple > 1
-            ? `DKKDKK{(order.totalAmount / parseInt(noOfPoeple)).toFixed(2)}/person`
+            ? `DKK${(order.totalAmount / parseInt(noOfPoeple)).toFixed(2)}/person`
             : ''}
         </div>
       )}
