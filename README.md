@@ -1,11 +1,12 @@
 # Bar Tab Orders
 
-React assessment project with price-list and order views, shared order state, and browser-local persistence.
+**[View demo in your browser →](https://mish-bartab-react.netlify.app/)**
+
+React project with price-list and order views, shared order state, and browser-local persistence.
 
 **Implementation:** [Order flows and local persistence](https://github.com/mishs/bartab-frontend-react/blob/main/src/App.js)  
 **Portfolio:** [Explore my selected engineering work](https://github.com/mishs/mishs/blob/main/PORTFOLIO.md)
 
-Test assignment for the frontend developer job position, with interviews in September/Oktober 2021.
 
 ## Table of Content
 > ### Technologies used
